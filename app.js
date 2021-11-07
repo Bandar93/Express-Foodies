@@ -2,9 +2,9 @@ const express = require("express")
 const connectDB = require("./database")
 const userRoutes = require("./apis/users/users.routes");
 const app = express();
-
+app.use(express.json())
 connectDB();
-app.use("/apis", userRoutes);
+app.use("/api", userRoutes);
 
 
 const PORT = 8000;
