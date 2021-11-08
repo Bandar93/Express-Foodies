@@ -20,3 +20,11 @@ try {
     return done(error)
 }
 })
+
+// exports.jwtStrategy = new JWTStrategy({
+// jwtFromRequest: fromAthHeaderAsBearerToken(),
+// secretOrKey: JWT_SECRET,},() => {
+//     console.log("TEST HII")
+
+
+// })

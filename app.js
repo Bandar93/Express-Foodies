@@ -15,6 +15,7 @@ app.use(express.json())
 // Passport
 app.use(passport.initialize());
 passport.use(localStrategy);
+// passport.use(jwtStrategy)
 
 // Routes
 app.use("/api", userRoutes);
