@@ -28,3 +28,14 @@ exports.signup = async (req, res, next) => {
       next(error);
     }
   };
+
+  exports.signin = (req,res,next) => {
+    const payload = {
+        _id: req.user._id ,
+        username: req.user.username,
+        exp: Date.now() + JWT_EXPIRATION_MS
+    };
+    const token = jwt.sign(payload, JWT_SECRET);
+    res.json({ token })
+
+  };
