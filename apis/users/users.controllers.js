@@ -23,7 +23,9 @@ exports.signup = async (req, res, next) => {
 
 
 
+      
       res.status(201).json({ token });
+      
     } catch (error) {
       next(error);
     }
