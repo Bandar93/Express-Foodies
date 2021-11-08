@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const morgan = require("mongoose-morgan");
 const Cuisine = require("../../db/model/Cuisine");
 
 exports.cuisineListFetch = async (req, res, next) => {

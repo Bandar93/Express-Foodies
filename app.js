@@ -26,6 +26,7 @@ passport.use(localStrategy);
 // Routes
 app.use("/api", userRoutes);
 app.use("/api", cuisineRoutes);
+app.use("/media", express.static(path.join(__dirname, "media")));
 
 const PORT = 8000;
 app.listen(PORT, () => console.log(`its working ${PORT}`));
