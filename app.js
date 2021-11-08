@@ -1,9 +1,22 @@
 const express = require("express")
 const connectDB = require("./database")
 const userRoutes = require("./apis/users/users.routes");
+const {localStrategy} = require("./middleware/passport")
 const app = express();
-app.use(express.json())
+const passport = require("passport")
+
+
+// DB
 connectDB();
+
+// Middleware
+app.use(express.json())
+
+// Passport
+app.use(passport.initialize());
+passport.use(localStrategy);
+
+// Routes
 app.use("/api", userRoutes);
 
 
