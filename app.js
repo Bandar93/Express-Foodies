@@ -1,16 +1,22 @@
-const express = require("express")
-const connectDB = require("./database")
+const express = require("express");
+const connectDB = require("./database");
+const cors = require("cors");
+const path = require("path");
 const userRoutes = require("./apis/users/users.routes");
-const {localStrategy} = require("./middleware/passport")
+const cuisineRoutes = require("./apis/cuisines/cuisines.routes");
+const { localStrategy } = require("./middleware/passport");
 const app = express();
-const passport = require("passport")
+const passport = require("passport");
 
+// Image Handling
+
+app.use(cors());
 
 // DB
 connectDB();
 
 // Middleware
-app.use(express.json())
+app.use(express.json());
 
 // Passport
 app.use(passport.initialize());
@@ -19,7 +25,7 @@ passport.use(localStrategy);
 
 // Routes
 app.use("/api", userRoutes);
-
+app.use("/api", cuisineRoutes);
 
 const PORT = 8000;
-app.listen(PORT,() => console.log(`its working ${PORT}`))
+app.listen(PORT, () => console.log(`its working ${PORT}`));
