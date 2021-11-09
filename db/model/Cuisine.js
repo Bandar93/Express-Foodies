@@ -16,5 +16,6 @@ const CuisineSchema = Schema(
   // Need to add relation for Dishes
 );
 
+// REVIEW: You have this plugin but you dont have a slug field in your model
 CuisineSchema.plugin(mongooseSlugPlugin, { tmpl: "<%=name%>" });
 module.exports = mongoose.model("Cuisine", CuisineSchema);

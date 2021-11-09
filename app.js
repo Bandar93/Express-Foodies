@@ -7,14 +7,13 @@ const cuisineRoutes = require("./apis/cuisines/cuisines.routes");
 const { localStrategy } = require("./middleware/passport");
 const app = express();
 
-const passport = require("passport")
-const morgan = require('morgan');
-const logger = require("./middleware/logger")
-const cors = require("cors")
-
+const passport = require("passport");
+const morgan = require("morgan");
+const logger = require("./middleware/logger");
+const cors = require("cors");
 
 // Image Handling
-
+// REVIEW: cors is added twice
 app.use(cors());
 
 // DB
@@ -22,12 +21,10 @@ connectDB();
 
 // Middleware
 
-app.use(express.json())
+app.use(express.json());
 app.use(morgan("dev"));
 app.use(logger);
-app.use(cors())
-
-
+app.use(cors());
 
 // Passport
 app.use(passport.initialize());
@@ -36,6 +33,7 @@ passport.use(localStrategy);
 
 // Routes
 app.use("/api", userRoutes);
+// REVIEW: Better naming: /api/cuisines
 app.use("/api", cuisineRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
 
