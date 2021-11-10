@@ -4,18 +4,19 @@ const cors = require("cors");
 const path = require("path");
 const userRoutes = require("./apis/users/users.routes");
 const cuisineRoutes = require("./apis/cuisines/cuisines.routes");
-const { localStrategy } = require("./middleware/passport");
+const recipesRoutes = require("./apis/recipes/recipes.routes")
+const { localStrategy, jwtStrategy } = require("./middleware/passport");
 const app = express();
 
 const passport = require("passport")
 const morgan = require('morgan');
 const logger = require("./middleware/logger")
-const cors = require("cors")
+
 
 
 // Image Handling
 
-app.use(cors());
+
 
 // DB
 connectDB();
@@ -32,12 +33,14 @@ app.use(cors())
 // Passport
 app.use(passport.initialize());
 passport.use(localStrategy);
-// passport.use(jwtStrategy)
+passport.use(jwtStrategy);
 
 // Routes
 app.use("/api", userRoutes);
 app.use("/api", cuisineRoutes);
+app.use("/api",recipesRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
+
 
 const PORT = 8000;
 app.listen(PORT, () => console.log(`its working ${PORT}`));

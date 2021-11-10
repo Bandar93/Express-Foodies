@@ -6,14 +6,24 @@ const { Schema } = mongoose;
 
 const CuisineSchema = Schema(
   {
+    slug: String,
     name: { type: String, required: true },
     image: { type: String },
     description: { type: String },
+    ricipes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Ricipes",
+      },
+   ],
+
   },
+
 
   { timestamps: true }
 
-  // Need to add relation for Dishes
+ 
+
 );
 
 CuisineSchema.plugin(mongooseSlugPlugin, { tmpl: "<%=name%>" });
