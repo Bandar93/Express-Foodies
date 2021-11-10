@@ -6,7 +6,12 @@ const userRoutes = require("./apis/users/users.routes");
 const cuisineRoutes = require("./apis/cuisines/cuisines.routes");
 const { localStrategy } = require("./middleware/passport");
 const app = express();
-const passport = require("passport");
+
+const passport = require("passport")
+const morgan = require('morgan');
+const logger = require("./middleware/logger")
+const cors = require("cors")
+
 
 // Image Handling
 
@@ -16,7 +21,13 @@ app.use(cors());
 connectDB();
 
 // Middleware
-app.use(express.json());
+
+app.use(express.json())
+app.use(morgan("dev"));
+app.use(logger);
+app.use(cors())
+
+
 
 // Passport
 app.use(passport.initialize());
