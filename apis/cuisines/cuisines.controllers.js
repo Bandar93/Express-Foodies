@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const morgan = require("mongoose-morgan");
 const Cuisine = require("../../db/model/Cuisine");
+
 const Recipes = require("../../db/model/Ricipes")
 
 
@@ -15,6 +16,9 @@ exports.fetchCuisine = async (req, res, next) => {
 };
 
 
+const normalize = require("normalize-path"); // Normalize Unix and Windows paths
+
+
 exports.cuisineListFetch = async (req, res, next) => {
   try {
     const cuisines = await Cuisine.find();
@@ -27,8 +31,17 @@ exports.cuisineListFetch = async (req, res, next) => {
 exports.cuisineCreate = async (req, res) => {
   
   try {
+    console.log("req file", req.file);
+    console.log("req body", req.body);
+
     if (req.file) {
-      req.body.image = `${req.protocol}://${req.get("host")}/${req.file.path}`;
+
+      
+
+      req.body.image = `${req.protocol}://${req.get("host")}/${normalize(
+        req.file.path
+      )}`;
+
     }
 
     console.log(req.body)
