@@ -5,7 +5,7 @@ const Recipes = require("../../db/model/Recipes");
 
 exports.recipesListFetch = async (req, res, next) => {
   try {
-    const recipes = await Recipes.find().populate();
+    const recipes = await Recipes.find();
     return res.json(recipes);
   } catch (error) {
     next(error);
